@@ -1,24 +1,32 @@
+#include <iostream>
 #include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+#include <SFML/System.hpp>
+#include <SFML/Audio.hpp>
+#include <SFML/Network.hpp>
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+    //window
+    sf::Window window(sf::VideoMode(600, 800), "first game", sf::Style::Titlebar | sf::Style::Close);
 
+    //game loop
     while (window.isOpen())
     {
         sf::Event event;
         while (window.pollEvent(event))
         {
-            if (event.type == sf::Event::Closed)
+            if (event.type == sf::Event::Closed) {
                 window.close();
+            }
+            if (event.key.code == sf::Keyboard::Escape) {
+				window.close();
+            }
         }
 
-        window.clear();
-        window.draw(shape);
         window.display();
     }
 
+    //end
     return 0;
 }
